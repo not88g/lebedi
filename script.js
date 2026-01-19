@@ -39,7 +39,7 @@ function closeAlbumPage() {
 document.addEventListener('DOMContentLoaded', () => {
     const singlesContainer = document.getElementById('singles-container');
     const epsContainer = document.getElementById('eps-container');
-    const BOT_USERNAME = 'dvalebedya_bot';
+    const BOT_USERNAME = 'dvalebebdya_bot';
 
     function createCard(item) {
         const card = document.createElement('div');
