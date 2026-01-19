@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>2 ЛЕБЕДЯ [BETA 2.0] - Official World</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="header-glossy">
+        <div class="logo-container">
+            <h1 class="logo-text">2 ЛЕБЕДЯ И ПЕРДЕЖКА НА ФОНЕ</h1>
+            <span class="badge-beta">BETA 2.0</span>
+        </div>
+        <div class="slogan">Музыка. Страсть. Интернет.</div>
+    </div>
+
+    <div class="news-ticker">
+        <marquee scrollamount="12" scrolldelay="100">
+            +++ СРОЧНО: ДУЭТ "2 ЛЕБЕДЯ" РАЗРЫВАЕТ ЧАРТЫ СЫЗРАНИ +++ НОВЫЙ РЕЛИЗ "ПЕРЬЯ НА АСФАЛЬТЕ" СКОРО +++ ПОКУПАЙ ЗА ЗВЕЗДЫ +++
+        </marquee>
+    </div>
+
+    <div id="promo-banner" onclick="openAlbumPage()">
+        <div class="shine-effect"></div>
+        <h2>🔥 ПЕРЬЯ НА АСФАЛЬТЕ 🔥</h2>
+        <div id="countdown">ЗАГРУЗКА ВРЕМЕНИ...</div>
+        <p class="click-bait">>> ЖМИ СЮДА ДЛЯ ЭКСКЛЮЗИВА <<</p>
+    </div>
+
+    <div class="web2-container">
+        
+        <aside class="sidebar">
+            <div class="widget">
+                <h3>Навигация</h3>
+                <ul class="glossy-menu">
+                    <li><a href="#">🏠 Домой</a></li>
+                    <li><a href="#">🎵 MP3 Скачать</a></li>
+                    <li><a href="#">guestbook.php</a></li>
+                </ul>
+            </div>
+
+            <div class="widget">
+                <h3>Облако тегов</h3>
+                <div class="tag-cloud">
+                    <span>Любовь</span> <span>Боль</span> <span>Техно</span> 
+                    <span style="font-size: 20px">ЛЕБЕДИ</span> <span>Ремикс</span>
+                    <span>mp3</span> <span>бесплатно</span>
+                </div>
+            </div>
+
+            <div class="widget">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/43/Feed-icon.svg" width="20" alt="RSS"> 
+                <span style="font-size: 10px; font-family: Arial;">Subscribe RSS</span>
+            </div>
+        </aside>
+
+        <main>
+            <div class="content-box">
+                <h2 class="glossy-title">Дискография</h2>
+                <p>Добро пожаловать на сайт самого лучшего трио!</p>
+                
+                <div class="filter-bar">
+                    Сортировать по: <a href="#">Крутости</a> | <a href="#">Дате</a>
+                </div>
+
+                <h3>📀 СИНГЛЫ</h3>
+                <div id="singles-container" class="release-grid">Loading AJAX...</div>
+
+                <br><br>
+
+                <h3>💿 EP (Мини-Альбомы)</h3>
+                <div id="eps-container" class="release-grid">Loading AJAX...</div>
+            </div>
+        </main>
+
+    </div>
+
+    <footer class="footer-glossy">
+        (c) 2003-2026 Web 2.0 Design Inc. <br>
+        <a href="#">Отказ от ответственности</a>
+    </footer>
+
+    <div id="album-popup" class="lightbox-overlay" style="display: none;">
+        <div class="lightbox-content">
+            <div class="lightbox-header">
+                <span>Предпросмотр Альбома</span>
+                <button onclick="closeAlbumPage()" class="close-btn">X</button>
+            </div>
+            <div class="lightbox-body">
+                <img src="cover.png" class="album-cover-glossy">
+                <h2>ПЕРЬЯ НА АСФАЛЬТЕ</h2>
+                <div class="tracklist-web2">
+                    <ol>
+                        <li>Без Слов</li>
+                        <li>Hello <span class="badge-new">HIT!</span></li>
+                        <li>Смешно и Весело!</li>
+                        <li>Фристайл (2 Лебедя)</li>
+                        <li>Мертвые Мечты <span class="badge-new">HIT!</span></li>
+                        <li>Ответ: Гудбай</li>
+                        <li>Аутро - Конечная Остоновка</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,318 @@
+/* Общий фон - полоски, популярные в 2006 */
+body {
+    background: repeating-linear-gradient(
+        45deg,
+        #f0f0f0,
+        #f0f0f0 10px,
+        #e0e0e0 10px,
+        #e0e0e0 20px
+    );
+    font-family: "Comic Sans MS", cursive; /* Король шрифтов */
+    margin: 0;
+    color: #333;
+}
+
+a { color: #0066cc; text-decoration: none; }
+a:hover { text-decoration: underline; color: #ff6600; }
+
+/* Шапка с эффектом "Гель" */
+.header-glossy {
+    background: linear-gradient(to bottom, #00ccff, #0066cc);
+    padding: 20px;
+    border-bottom: 5px solid #003366;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Отражение текста (модный эффект) */
+.logo-text {
+    font-size: 60px;
+    color: white;
+    margin: 0;
+    text-shadow: 0px 0px 10px #ffff00;
+    -webkit-box-reflect: below -10px linear-gradient(transparent, rgba(255,255,255,0.4));
+}
+
+.badge-beta {
+    background: red;
+    color: white;
+    padding: 2px 5px;
+    font-size: 12px;
+    border-radius: 5px;
+    vertical-align: top;
+    box-shadow: 2px 2px 0px black;
+    transform: rotate(-10deg);
+    display: inline-block;
+}
+
+/* Новостная лента */
+.news-ticker {
+    background: black;
+    color: lime;
+    font-family: monospace;
+    font-size: 18px;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    padding: 5px 0;
+}
+
+/* Баннер с таймером */
+#promo-banner {
+    width: 80%;
+    margin: 20px auto;
+    background: linear-gradient(to bottom, #ff99cc, #ff0066); /* Розовый гламур */
+    border-radius: 20px;
+    border: 3px solid white;
+    box-shadow: 0 10px 20px rgba(255,0,100,0.5);
+    text-align: center;
+    color: white;
+    padding: 20px;
+    cursor: pointer;
+    position: relative;
+}
+
+#promo-banner:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 30px yellow;
+}
+
+#countdown {
+    font-size: 36px;
+    font-weight: bold;
+    text-shadow: 2px 2px 0 #000;
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    display: inline-block;
+    padding: 10px;
+}
+
+/* Контейнер контента */
+.web2-container {
+    display: flex;
+    width: 960px;
+    margin: 20px auto;
+    gap: 20px;
+}
+
+/* Левая колонка */
+.sidebar {
+    width: 250px;
+}
+
+.widget {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-shadow: 3px 3px 10px #ccc;
+}
+
+.glossy-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.glossy-menu li a {
+    display: block;
+    background: linear-gradient(to bottom, #ffffff, #e6e6e6);
+    padding: 8px;
+    margin-bottom: 5px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    color: #333;
+    font-weight: bold;
+}
+
+.glossy-menu li a:hover {
+    background: linear-gradient(to bottom, #ccffcc, #66ff66); /* Кислотный ховер */
+}
+
+/* Облако тегов */
+.tag-cloud span {
+    color: #0066cc;
+    cursor: pointer;
+}
+.tag-cloud span:hover { font-size: 1.2em; color: magenta; }
+
+/* Основной контент */
+.content-box {
+    flex-grow: 1;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border: 5px solid cyan;
+}
+
+.glossy-title {
+    background: linear-gradient(to right, cyan, transparent);
+    color: #000080;
+    padding: 10px;
+    border-radius: 10px 0 0 10px;
+    text-shadow: 1px 1px 0 white;
+}
+
+/* Сетка релизов */
+.release-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Карточка товара в стиле Web 2.0 */
+.release-card {
+    background: linear-gradient(to bottom, #fff, #f0f0f0);
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 15px;
+    width: 180px;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.1);
+    transition: all 0.2s;
+}
+
+.release-card:hover {
+    border-color: orange;
+    transform: translateY(-5px);
+}
+
+.release-card img {
+    border-radius: 10px;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.3);
+    margin-bottom: 10px;
+}
+
+/* Кнопка купить - "Стеклянная" */
+.buy-btn {
+    display: block;
+    margin-top: 10px;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Bubble_segment.svg/10px-Bubble_segment.svg.png'), linear-gradient(to bottom, #adff2f, #32cd32);
+    border: 1px solid #228b22;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #006400;
+    padding: 8px;
+    box-shadow: inset 0 10px 10px rgba(255,255,255,0.5);
+}
+
+.buy-btn:hover {
+    background: linear-gradient(to bottom, #ffff00, #ffcc00);
+    color: black;
+    text-shadow: none;
+}
+
+/* --- LIGHTBOX (Popup) --- */
+.lightbox-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8); /* Затемнение фона */
+    z-index: 1000;
+}
+
+.lightbox-content {
+    background: white;
+    width: 90%; /* Больше ширины на мобилках */
+    max-width: 600px;
+    max-height: 85vh; /* Ограничиваем высоту до 85% экрана */
+    margin: 5vh auto;
+    border-radius: 20px;
+    border: 5px solid #00ccff;
+    display: flex;
+    flex-direction: column; /* Чтобы заголовок был сверху, а тело скроллилось */
+    overflow: hidden; /* Скрываем вылеты */
+}
+
+.lightbox-header {
+    background: #333;
+    color: white;
+    padding: 10px;
+    text-align: right;
+}
+
+.close-btn {
+    background: red;
+    color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.lightbox-body {
+    padding: 20px;
+    overflow-y: auto; /* ВКЛЮЧАЕМ СКРОЛЛИНГ */
+    background: linear-gradient(to bottom, #e0e0e0, #fff);
+    flex-grow: 1;
+}
+
+.album-cover-glossy {
+    width: 250px; /* Фиксируем размер, чтобы не занимал весь экран */
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    margin-bottom: 20px;
+}
+
+/* Стилизация скроллбара в стиле "вырви глаз" */
+.lightbox-body::-webkit-scrollbar {
+    width: 15px;
+}
+.lightbox-body::-webkit-scrollbar-track {
+    background: #ff00ff; /* Розовый трек */
+}
+.lightbox-body::-webkit-scrollbar-thumb {
+    background: #00ff00; /* Зеленый ползунок */
+    border: 2px solid black;
+}
+
+/* Эффект безумного наведения */
+.release-card:hover img {
+    animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+}
+
+/* Скроллбар для поп-апа, если он еще не идеален */
+.lightbox-body {
+    scrollbar-width: thick;
+    scrollbar-color: #00ff00 #ff00ff;
+}
+
+.tracklist-web2 {
+    text-align: left;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.badge-new {
+    background: orange;
+    color: white;
+    font-size: 10px;
+    padding: 2px;
+    border-radius: 3px;
+    margin-left: 5px;
+}
+
+.footer-glossy {
+    background: #333;
+    color: #ccc;
+    padding: 20px;
+    margin-top: 30px;
+    border-top: 5px solid #00ccff;
+}

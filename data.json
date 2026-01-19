@@ -1,0 +1,45 @@
+[
+  {
+    "id": "no_words_single",
+    "title": "Без Слов",
+    "type": "single",
+    "year": "20.01.2026",
+    "price": 10,
+    "image": "no-words.png"
+  },
+  {
+    "id": "hello_2026",
+    "title": "Hello",
+    "type": "single",
+    "year": "18.01.2026",
+    "price": 0,
+    "image": "cover.png",
+    "file": "/music/hello.mp3"
+  },
+  {
+    "id": "ny_2025",
+    "title": "cияющий праздник",
+    "type": "single",
+    "year": "31.12.2025",
+    "price": 5,
+    "image": "new-year.png"
+  },
+  {
+    "id": "bitch_ep",
+    "title": "B!TCH",
+    "type": "ep",
+    "year": "20.12.2025",
+    "price": 40,
+    "image": "bitch.png",
+    "tracks": ["BRAND NEW BITCH", "PROSTITUTE", "DRINK THAT HOLY WATER", "BRAND NEW TITS"]
+  },
+  {
+    "id": "perya_ep",
+    "title": "ПЕРЬЯ НА АСФАЛЬТЕ",
+    "type": "ep",
+    "year": "28.01.2026",
+    "price": 100,
+    "image": "cover.png",
+    "tracks": ["Без Слов", "Hello", "Смешно и Весело!", "Фристайл", "Мертвые Мечты", "Ответ: Гудбай", "Аутро - Конечная Остоновка"]
+  }
+]
