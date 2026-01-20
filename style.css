@@ -7,7 +7,9 @@ body {
         #e0e0e0 10px,
         #e0e0e0 20px
     );
-    font-family: "Comic Sans MS", cursive; /* Король шрифтов */
+    /* Сначала пытаемся загрузить Google Font, потом системный комик санс */
+    font-family: 'Comic Neue', "Comic Sans MS", "Comic Sans", cursive;
+    -webkit-font-smoothing: none; /* Отключаем сглаживание для пущего эффекта старого интернета */
     margin: 0;
     color: #333;
 }
@@ -360,3 +362,4 @@ a:hover { text-decoration: underline; color: #ff6600; }
     border-top: 5px solid #00ccff;
 
 }
+
