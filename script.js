@@ -27,6 +27,17 @@ const timerInterval = setInterval(function() {
     }
 }, 1000);
 
+document.addEventListener('DOMContentLoaded', () => {
+    // Детектор Apple устройств (Safari / iOS)
+    const isApple = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) ||
+                    /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    if (isApple) {
+        document.body.classList.add('is-safari');
+        console.log("Apple device detected: Applying Marker Felt fallback.");
+    }
+    
 // Функции открытия и закрытия окна альбома
 function openAlbumPage() {
     document.getElementById('album-popup').style.display = 'block';
@@ -161,3 +172,4 @@ window.showAlbumDetails = function(albumId) {
         });
 
 });
+
