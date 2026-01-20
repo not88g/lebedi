@@ -9,11 +9,11 @@
   },
   {
     "id": "hello_2026",
-    "title": "Hello",
+    "title": "Hello (Demo)",
     "type": "single",
     "year": "18.01.2026",
     "price": 0,
-    "image": "cover.png",
+    "image": "hello.png",
     "file": "/music/hello.mp3"
   },
   {
@@ -53,3 +53,4 @@
     "tracks": ["Без Слов", "Hello", "Смешно и Весело!", "Фристайл", "Мертвые Мечты", "Ответ: Гудбай", "Аутро - Конечная Остоновка", "стчпр"]
   }
 ]
+
