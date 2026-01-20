@@ -7,10 +7,26 @@ body {
         #e0e0e0 10px,
         #e0e0e0 20px
     );
-    /* Добавляем 'Comic Neue' на первое место и убираем лишние кавычки для надежности */
-    font-family: 'Comic Neue', 'Comic Sans MS', cursive !important;
-    -webkit-font-smoothing: antialiased; /* Немного сгладим для Safari */
-    text-rendering: optimizeLegibility;
+    /* Стандартное правило для всех */
+    font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+}
+
+/* Специфичное правило для Apple девайсов */
+body.is-safari, 
+body.is-safari h1, 
+body.is-safari h2, 
+body.is-safari h3, 
+body.is-safari p, 
+body.is-safari a, 
+body.is-safari button {
+    font-family: 'Marker Felt', 'Comic Neue', sans-serif !important;
+    letter-spacing: 0.5px; /* Marker Felt бывает тесноват, добавим воздуха */
+}
+
+/* Делаем заголовки чуть более "выпуклыми" для Marker Felt */
+body.is-safari .logo-text {
+    -webkit-text-stroke: 1px #00ccff; /* Голубая обводка для стиля */
+    font-weight: bold;
 }
 
 /* Если заголовки всё равно ломаются, пропиши им принудительно: */
@@ -367,5 +383,6 @@ a:hover { text-decoration: underline; color: #ff6600; }
     border-top: 5px solid #00ccff;
 
 }
+
 
 
