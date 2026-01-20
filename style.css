@@ -7,11 +7,16 @@ body {
         #e0e0e0 10px,
         #e0e0e0 20px
     );
-    /* Сначала пытаемся загрузить Google Font, потом системный комик санс */
-    font-family: 'Comic Neue', "Comic Sans MS", "Comic Sans", cursive;
-    -webkit-font-smoothing: none; /* Отключаем сглаживание для пущего эффекта старого интернета */
-    margin: 0;
-    color: #333;
+    /* Добавляем 'Comic Neue' на первое место и убираем лишние кавычки для надежности */
+    font-family: 'Comic Neue', 'Comic Sans MS', cursive !important;
+    -webkit-font-smoothing: antialiased; /* Немного сгладим для Safari */
+    text-rendering: optimizeLegibility;
+}
+
+/* Если заголовки всё равно ломаются, пропиши им принудительно: */
+h1, h2, h3, p, a, div {
+    font-family: 'Comic Neue', 'Comic Sans MS', cursive !important;
+}
 }
 
 a { color: #0066cc; text-decoration: none; }
@@ -362,4 +367,5 @@ a:hover { text-decoration: underline; color: #ff6600; }
     border-top: 5px solid #00ccff;
 
 }
+
 
