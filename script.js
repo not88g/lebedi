@@ -76,30 +76,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 4. ПОП-АП АЛЬБОМА
     window.showAlbumDetails = function(albumId) {
-        fetch('data.json')
-            .then(r => r.json())
-            .then(data => {
-                const album = data.find(a => a.id === albumId);
-                if (!album) return;
+    fetch('data.json')
+        .then(r => r.json())
+        .then(data => {
+            // Если мы передали бонусный ID, данные всё равно берем из основного
+            const isBonus = (albumId === 'perya_bonus_ep');
+            const targetId = isBonus ? 'perya_ep' : albumId;
+            
+            const album = data.find(a => a.id === targetId);
+            if (!album) return;
 
-                const popup = document.getElementById('album-popup');
-                if (!popup) return;
-
-                const isPerya = albumId === 'perya_ep';
-                popup.querySelector('h2').innerText = isPerya ? album.title + " (ПРЕДЗАКАЗ)" : album.title;
-                popup.querySelector('.album-cover-glossy').src = isPerya 
-                    ? "https://github.com/not88g/lebedi/raw/refs/heads/main/alt%20cover.png" 
-                    : album.image;
-                
-                const tracks = isPerya ? [...album.tracks, "8. стчпр!рем (SECRET BONUS)"] : album.tracks;
+            const popup = document.getElementById('album-popup');
+            
+            // Настраиваем контент
+            if (isBonus) {
+                popup.querySelector('h2').innerText = album.title + " (ПРЕДЗАКАЗ)";
+                popup.querySelector('.album-cover-glossy').src = "https://github.com/not88g/lebedi/raw/refs/heads/main/alt%20cover.png";
+                const tracks = [...album.tracks, "8. стчпр!рем (SECRET BONUS)"];
                 popup.querySelector('.tracklist-web2 ol').innerHTML = tracks.map(t => `<li>${t}</li>`).join('');
-                
-                popup.style.display = 'block';
-            });
-    };
+            } else {
+                popup.querySelector('h2').innerText = album.title;
+                popup.querySelector('.album-cover-glossy').src = album.image;
+                popup.querySelector('.tracklist-web2 ol').innerHTML = album.tracks.map(t => `<li>${t}</li>`).join('');
+            }
+
+            // Добавляем кнопку превью, если это "Без слов" или "Перья"
+            if (targetId === 'perya_ep' || targetId === 'no_words') {
+                const previewBtn = `
+                    <button onclick="playPreview('https://github.com/not88g/lebedi/raw/refs/heads/main/music/aftercare.m4a')" 
+                            class="preview-btn" style="margin-top:10px; width:100%;">
+                        ▶ ПОСЛУШАТЬ ОТРЫВОК (0:40)
+                    </button>`;
+                popup.querySelector('.tracklist-web2').insertAdjacentHTML('beforeend', previewBtn);
+            }
+
+            popup.style.display = 'block';
+        });
 
     window.closeAlbumPage = () => {
         const p = document.getElementById('album-popup');
         if (p) p.style.display = 'none';
     };
 });
+
