@@ -36,6 +36,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
 
+    let previewAudio = new Audio();
+
+window.playPreview = function(url) {
+    if (!previewAudio.paused) {
+        previewAudio.pause();
+    }
+
+    previewAudio.src = url;
+    previewAudio.currentTime = 40; // Стартуем с 40 секунды
+    previewAudio.volume = 0; // Начинаем с тишины для fade-in
+    previewAudio.play();
+
+    // Fade-in (плавное появление за 1.5 сек)
+    let fadeIn = setInterval(() => {
+        if (previewAudio.volume < 0.9) {
+            previewAudio.volume += 0.1;
+        } else {
+            clearInterval(fadeIn);
+        }
+    }, 150);
+
+    // Fade-out и остановка через 15 секунд (на 55-й секунде)
+    setTimeout(() => {
+        let fadeOut = setInterval(() => {
+            if (previewAudio.volume > 0.1) {
+                previewAudio.volume -= 0.1;
+            } else {
+                clearInterval(fadeOut);
+                previewAudio.pause();
+            }
+        }, 150);
+    }, 13500); // Начинаем затухание чуть раньше конца (через 13.5 сек)
+};
+
+
     // 3. ЗАГРУЗКА ДАННЫХ (data.json)
     fetch('data.json')
         .then(response => {
@@ -118,4 +153,5 @@ document.addEventListener('DOMContentLoaded', () => {
         if (p) p.style.display = 'none';
     };
 });
+
 
