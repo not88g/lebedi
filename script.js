@@ -88,6 +88,66 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     };
 
+    
+// --- ЛОГИКА БОНУСНОГО БАННЕРА ---
+const bonusBanner = document.getElementById('bonus-promo-banner');
+const releaseTime = new Date('2026-01-28T09:00:00').getTime();
+
+function updateBonusVisibility() {
+    const now = new Date().getTime();
+    
+    if (now < releaseTime) {
+        // Если релиз еще не вышел - показываем бонусный баннер
+        if (bonusBanner) bonusBanner.style.display = 'block';
+    } else {
+        // Если время вышло - удаляем его совсем
+        if (bonusBanner) bonusBanner.remove();
+    }
+}
+
+// Проверяем при загрузке
+updateBonusVisibility();
+// И проверяем каждую минуту (на случай если юзер зашел прямо перед релизом)
+setInterval(updateBonusVisibility, 60000);
+
+
+// --- ОБНОВЛЕНИЕ showAlbumDetails ДЛЯ БОНУСНОЙ ВЕРСИИ ---
+// Найди старую функцию и убедись, что она обрабатывает новый ID:
+const originalShowDetails = window.showAlbumDetails;
+window.showAlbumDetails = function(albumId) {
+    if (albumId === 'perya_bonus_ep') {
+        const popup = document.getElementById('album-popup');
+        popup.querySelector('h2').innerText = "ПЕРЬЯ НА АСФАЛЬТЕ (БОНУС-ИЗДАНИЕ)";
+        popup.querySelector('.album-cover-glossy').src = "https://github.com/not88g/lebedi/raw/refs/heads/main/alt%20cover.png";
+        
+        // Список с 8-м треком
+        const tracks = [
+            "1. Без Слов", "2. Hello", "3. Смешно и Весело!", 
+            "4. Фристайл", "5. Мертвые Мечты", "6. Ответ: Гудбай", 
+            "7. Аутро", "8. стчпр!рем (EXCLUSIVE)"
+        ];
+        
+        const listElem = popup.querySelector('.tracklist-web2 ol');
+        listElem.innerHTML = tracks.map(t => `<li>${t}</li>`).join('');
+        popup.style.display = 'block';
+    } else {
+        // Если ID не бонусный - запускаем стандартную логику
+        // (Тут должен быть твой fetch из data.json, который мы писали ранее)
+        fetch('data.json').then(r => r.json()).then(data => {
+            const album = data.find(a => a.id === albumId);
+            if (album) {
+                const popup = document.getElementById('album-popup');
+                popup.querySelector('h2').innerText = album.title;
+                popup.querySelector('.album-cover-glossy').src = album.image;
+                popup.querySelector('.tracklist-web2 ol').innerHTML = album.tracks.map(t => `<li>${t}</li>`).join('');
+                popup.style.display = 'block';
+            }
+        });
+    }
+};
+
+
+
     // Загрузка
     fetch('data.json')
         .then(r => r.json())
@@ -99,4 +159,5 @@ document.addEventListener('DOMContentLoaded', () => {
                 else epsContainer.appendChild(createCard(item));
             });
         });
+
 });
