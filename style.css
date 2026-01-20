@@ -286,6 +286,49 @@ a:hover { text-decoration: underline; color: #ff6600; }
   50% { transform: translate(-1px, 2px) rotate(-1deg); }
 }
 
+#bonus-promo-banner {
+    width: 80%;
+    margin: 10px auto;
+    background: linear-gradient(135deg, #000000 0%, #434343 100%);
+    border: 3px double #ffd700; /* Золотая рамка */
+    border-radius: 20px;
+    padding: 15px;
+    text-align: center;
+    color: #ffd700;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+    font-family: "Comic Sans MS", cursive;
+}
+
+#bonus-promo-banner:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 40px #ffd700;
+}
+
+.limited-tag {
+    background: #ffd700;
+    color: black;
+    font-weight: bold;
+    padding: 2px 10px;
+    display: inline-block;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.price-badge {
+    background: rgba(255, 215, 0, 0.2);
+    border: 1px solid #ffd700;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+
 /* Скроллбар для поп-апа, если он еще не идеален */
 .lightbox-body {
     scrollbar-width: thick;
@@ -315,4 +358,5 @@ a:hover { text-decoration: underline; color: #ff6600; }
     padding: 20px;
     margin-top: 30px;
     border-top: 5px solid #00ccff;
+
 }
