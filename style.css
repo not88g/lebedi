@@ -7,33 +7,59 @@ body {
         #e0e0e0 10px,
         #e0e0e0 20px
     );
-    /* Стандартное правило для всех */
-    font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+    /* Базовый шрифт для всех */
+    font-family: "Comic Sans MS", "Comic Neue", cursive;
 }
 
-/* Специфичное правило для Apple девайсов */
-body.is-safari, 
-body.is-safari h1, 
-body.is-safari h2, 
-body.is-safari h3, 
-body.is-safari p, 
-body.is-safari a, 
-body.is-safari button {
-    font-family: 'Marker Felt', 'Comic Neue', sans-serif !important;
-    letter-spacing: 0.5px; /* Marker Felt бывает тесноват, добавим воздуха */
+/* Принудительный Marker Felt для Apple (Safari/iOS/iPadOS) */
+/* Мы добавляем проверку, чтобы шрифт применялся ко всему тексту */
+.is-safari body,
+.is-safari h1, 
+.is-safari h2, 
+.is-safari h3, 
+.is-safari div, 
+.is-safari p, 
+.is-safari span,
+.is-safari #countdown {
+    font-family: "Marker Felt", "Comic Sans MS", sans-serif !important;
+    font-style: normal !important; /* Убираем курсив, если он затесался */
 }
 
-/* Делаем заголовки чуть более "выпуклыми" для Marker Felt */
-body.is-safari .logo-text {
-    -webkit-text-stroke: 1px #00ccff; /* Голубая обводка для стиля */
+/* Стили для черного баннера (как на скрине) */
+.exclusive-banner {
+    background: linear-gradient(180deg, #333 0%, #000 100%);
+    border: 2px solid #ffd700;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 10px auto;
+    max-width: 90%;
+    color: #ffd700;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+.banner-badge {
+    background: #ffd700;
+    color: #000;
+    font-size: 10px;
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 5px;
     font-weight: bold;
 }
 
-/* Если заголовки всё равно ломаются, пропиши им принудительно: */
-h1, h2, h3, p, a, div {
-    font-family: 'Comic Neue', 'Comic Sans MS', cursive !important;
+.banner-price-btn {
+    background: linear-gradient(to bottom, #7b6233, #4a3b1f);
+    color: #ffd700;
+    padding: 5px 15px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 12px;
+    border: 1px solid #ffd700;
 }
-}
+
 
 a { color: #0066cc; text-decoration: none; }
 a:hover { text-decoration: underline; color: #ff6600; }
@@ -383,6 +409,7 @@ a:hover { text-decoration: underline; color: #ff6600; }
     border-top: 5px solid #00ccff;
 
 }
+
 
 
 
