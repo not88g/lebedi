@@ -1,0 +1,4 @@
+# Example requirements.txt file
+aiogram==3.10.0
+asyncio
+logging
