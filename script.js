@@ -1,18 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. ДЕТЕКТОР APPLE (SAFARI/iOS) ДЛЯ ШРИФТА
+    // --- 1. ДЕТЕКТОР APPLE (ЧИНИТ ШРИФТЫ) ---
     const isApple = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                    (navigator.vendor && navigator.vendor.indexOf('Apple') > -1) ||
                     (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    
+
     if (isApple) {
+        document.documentElement.classList.add('is-safari');
         document.body.classList.add('is-safari');
-        console.log("Apple device detected: Font switched to Marker Felt");
+        console.log("Apple device detected: Marker Felt activated.");
     }
 
-    const singlesContainer = document.getElementById('singles-container');
-    const epsContainer = document.getElementById('eps-container');
-    const BOT_USERNAME = 'dvalebedya_bot';
-
-    // 2. ТАЙМЕР (С проверкой на наличие элемента)
+    // --- 2. ТАЙМЕР ОБРАТНОГО ОТСЧЕТА ---
     const releaseDate = new Date('2026-01-28T09:00:00').getTime();
     const timerElem = document.getElementById("countdown");
 
@@ -36,17 +34,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
 
-    // 3. ЗАГРУЗКА ДАННЫХ (data.json)
+    // --- 3. ГЕНЕРАЦИЯ СЕТКИ РЕЛИЗОВ ИЗ DATA.JSON ---
+    const singlesContainer = document.getElementById('singles-container');
+    const epsContainer = document.getElementById('eps-container');
+    const BOT_USERNAME = 'dvalebedya_bot';
+
     fetch('data.json')
-        .then(response => {
-            if (!response.ok) throw new Error('Network response was not ok');
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
             if (singlesContainer) singlesContainer.innerHTML = '';
             if (epsContainer) epsContainer.innerHTML = '';
 
             data.forEach(item => {
+                // Пропускаем бонусную версию в общей сетке, чтобы не дублировать
+                if (item.id === 'perya_bonus_ep') return;
+
                 const card = document.createElement('div');
                 card.className = 'release-card';
                 
@@ -54,10 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     ? `<a href="${item.file}" class="buy-btn" download style="background:linear-gradient(#fff,#ccc);color:#000">💾 СКАЧАТЬ (FREE)</a>`
                     : `<a href="https://t.me/${BOT_USERNAME}?start=buy_${item.id}" class="buy-btn" target="_blank">КУПИТЬ: ${item.price} ⭐</a>`;
 
+                // Для EP добавляем клик для открытия подробностей
                 const clickAction = item.type === 'ep' ? `onclick="showAlbumDetails('${item.id}')"` : '';
 
                 card.innerHTML = `
-                    <div ${clickAction} style="cursor:pointer">
+                    <div ${clickAction} style="cursor: ${item.type === 'ep' ? 'pointer' : 'default'}">
                         <img src="${item.image}" alt="${item.title}" width="150" height="150">
                         <p><b>${item.title}</b></p>
                         <p style="font-size:11px">Дата: ${item.year}</p>
@@ -69,30 +72,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 else if (item.type === 'ep' && epsContainer) epsContainer.appendChild(card);
             });
         })
-        .catch(err => {
-            console.error('Ошибка AJAX:', err);
-            if (singlesContainer) singlesContainer.innerHTML = 'Ошибка загрузки дискографии';
-        });
+        .catch(err => console.error('Ошибка загрузки:', err));
+});
 
-    // 4. ПОП-АП АЛЬБОМА
-    window.showAlbumDetails = function(albumId) {
+// --- 4. ФУНКЦИЯ ОТКРЫТИЯ АЛЬБОМА (УПРОЩЕННАЯ) ---
+window.showAlbumDetails = function(albumId) {
     fetch('data.json')
         .then(r => r.json())
         .then(data => {
+            // Просто ищем ID в базе. 
+            // Если передан 'perya_bonus_ep', он найдет запись с 8 треками и альт. обложкой.
             const album = data.find(a => a.id === albumId);
             if (!album) return;
 
             const popup = document.getElementById('album-popup');
             
-            // Просто выводим данные из JSON как они есть
+            // Заполняем данными из JSON
             popup.querySelector('h2').innerText = album.title;
             popup.querySelector('.album-cover-glossy').src = album.image;
             popup.querySelector('.tracklist-web2 ol').innerHTML = album.tracks.map(t => `<li>${t}</li>`).join('');
 
-            // Кнопка превью для "Без слов" / "Перьев"
+            // Удаляем старую кнопку превью, если была
             const existingBtn = popup.querySelector('.preview-btn');
             if (existingBtn) existingBtn.remove();
 
+            // Добавляем кнопку превью только для нужных альбомов
             if (albumId === 'perya_ep' || albumId === 'perya_bonus_ep') {
                 const previewBtn = `
                     <button onclick="playPreview('https://github.com/not88g/lebedi/raw/refs/heads/main/music/aftercare.m4a')" 
@@ -106,7 +110,49 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 };
 
+window.closeAlbumPage = function() {
+    const p = document.getElementById('album-popup');
+    if (p) {
+        p.style.display = 'none';
+        // Если музыка играла, останавливаем её при закрытии
+        if (typeof previewAudio !== 'undefined') {
+            previewAudio.pause();
+            previewAudio.currentTime = 0;
+        }
+    }
+};
 
+// --- 5. АУДИО ПЛЕЕР (FADE IN/OUT) ---
+let previewAudio = new Audio();
 
+window.playPreview = function(url) {
+    if (!previewAudio.paused) {
+        previewAudio.pause();
+    }
 
+    previewAudio.src = url;
+    previewAudio.currentTime = 40; // Старт с 40 сек
+    previewAudio.volume = 0;       // Начало с тишины
+    previewAudio.play();
 
+    // Плавное нарастание громкости
+    let fadeIn = setInterval(() => {
+        if (previewAudio.volume < 0.9) {
+            previewAudio.volume += 0.1;
+        } else {
+            clearInterval(fadeIn);
+        }
+    }, 150);
+
+    // Таймер на выключение через 15 секунд
+    setTimeout(() => {
+        let fadeOut = setInterval(() => {
+            if (previewAudio.volume > 0.1) {
+                previewAudio.volume -= 0.1;
+            } else {
+                clearInterval(fadeOut);
+                previewAudio.pause();
+            }
+        }, 150);
+    }, 13500); // Начинаем затухать чуть раньше
+};
